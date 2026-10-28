@@ -1,0 +1,989 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lengua y Literatura | Escuela de Artes</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--azul-oscuro:#172943;--azul-medio:#263d60;--azul-claro:#354d70;--dorado:#d9b66f;--dorado-claro:#f0d49b;--crema:#faf7f0;--blanco:#fff;--texto:#263247;--gris:#687386}
+html{scroll-behavior:smooth}
+body{min-height:100vh;background:var(--crema);color:var(--texto);font-family:"DM Sans",sans-serif;line-height:1.6}
+h1,h2,h3,h4{font-family:"Playfair Display",serif;line-height:1.3}
+p{margin-bottom:12px}
+img{max-width:100%}
+header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 7%;background:var(--azul-oscuro);color:#fff;border-bottom:3px solid var(--dorado);box-shadow:0 5px 18px #0002}
+.encabezado-logo{display:flex;align-items:center;gap:16px;cursor:pointer}
+.encabezado-logo img{width:58px;height:58px;object-fit:contain;border-radius:50%}
+.encabezado-titulo{display:flex;align-items:center;gap:12px;font-family:"Playfair Display",serif;font-size:1.5rem;color:var(--dorado-claro)}
+.codigo{display:inline-block;width:5px;height:38px;background:var(--dorado);border-radius:5px}
+main{width:min(1100px,90%);margin:38px auto 55px}
+.seccion{animation:aparecer .35s ease}
+.oculto{display:none!important}
+@keyframes aparecer{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.hero{padding:42px clamp(22px,5vw,58px);margin-bottom:38px;background:linear-gradient(120deg,#172943,#354d70);border-radius:18px;color:white;box-shadow:0 12px 30px #17294320}
+.hero h1{font-size:clamp(2rem,5vw,3.25rem);color:var(--dorado-claro);margin:6px 0 14px}
+.hero-texto{max-width:720px;color:#e4e9f1;font-size:1.05rem;margin:0}
+.etiqueta{display:inline-block;color:#987638;font-size:.76rem;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.hero .etiqueta{color:var(--dorado)}
+.contenedor{width:100%}
+h2{margin-bottom:14px;color:var(--azul-oscuro);font-size:clamp(1.6rem,3vw,2.1rem)}
+.introduccion,.texto-intro{max-width:750px;color:var(--gris);margin-bottom:10px}
+.grid-modulos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px 28px;padding:30px 8px 40px;perspective:1600px}
+.card-modulo{position:relative;display:block;width:100%;height:290px;padding:0;border:0;border-radius:5px;background:transparent;color:var(--texto);cursor:pointer;perspective:1600px;text-align:left;overflow:visible;transition:transform .3s ease}
+.card-modulo:hover{transform:translateY(-5px)}
+.card-modulo:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--dorado);outline-offset:5px}
+.libro{position:relative;width:100%;height:100%;transform-style:preserve-3d}
+.libro-hojas{position:absolute;inset:0;display:flex;background:#fffdf6;border:1px solid #d8c9a8;border-radius:4px 9px 9px 4px;box-shadow:2px 3px 0 #e0d4bc,4px 5px 0 #cfc1a5,0 12px 22px #1729432e}
+.pagina{position:relative;width:50%;height:100%;padding:22px 16px;overflow:hidden;color:var(--texto);background:linear-gradient(90deg,#f2ead9,#fffdf6 12%,#fffdf6)}
+.pagina-izquierda{border-right:1px solid #d6c9ae;border-radius:4px 0 0 4px}
+.pagina-derecha{border-radius:0 9px 9px 0;background:linear-gradient(90deg,#fffdf6,#f7f0e2)}
+.pagina h3{margin:12px 0;color:var(--azul-oscuro);font-size:1.05rem}
+.pagina p{color:#596579;font-size:.8rem;line-height:1.55}
+.pagina span{color:#987638;font-size:.7rem;font-weight:700;letter-spacing:1px}
+.ver-modulo{display:inline-block;margin-top:12px;color:var(--azul-medio);font-size:.8rem;font-weight:700}
+.libro-tapa{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:15px;padding:25px;color:#fff5dc;text-align:center;background:linear-gradient(110deg,#101d30,#172943 20%,#263d60 75%,#172943);border:2px solid #c6a363;border-radius:4px 10px 10px 4px;box-shadow:inset 7px 0 0 #b28c49,inset 10px 0 0 #e3c57f,inset 0 0 0 5px #172943,5px 8px 15px #0003;transform-origin:left center;transform:rotateY(0deg) translateZ(3px);backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .95s cubic-bezier(.2,.75,.2,1),box-shadow .7s ease}
+.tapa-numero{color:var(--dorado-claro);font-size:.8rem;font-weight:700;letter-spacing:3px}
+.libro-tapa h3{margin:0;color:#fff5dc;font-family:"Playfair Display",serif;font-size:1.5rem;line-height:1.3;text-shadow:2px 3px 5px #0006}
+.tapa-decoracion{color:var(--dorado);font-size:2.5rem}
+.tapa-subtitulo{color:#e0c990;font-size:.72rem;letter-spacing:2px;text-transform:uppercase}
+.card-modulo:hover .libro-tapa,.card-modulo:focus-visible .libro-tapa{transform:rotateY(-180deg);box-shadow:0 8px 20px #0002}
+.card-modulo:hover .libro-hojas,.card-modulo:focus-visible .libro-hojas{box-shadow:2px 3px 0 #e0d4bc,4px 5px 0 #cfc1a5,0 18px 28px #17294338}
+.titulo-anio,.titulo-tema{margin:26px 0}
+.titulo-anio h2,.titulo-tema h2{margin-top:8px}
+.boton-volver,.boton-accion,.boton{display:inline-block;padding:11px 18px;border:0;border-radius:8px;background:var(--azul-oscuro);color:#fff;font-family:"DM Sans",sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:background .2s,transform .2s}
+.boton-volver:hover,.boton-accion:hover,.boton:hover{background:var(--azul-medio);transform:translateY(-1px)}
+.grid-temas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:25px 0}
+.card-tema{padding:23px;text-align:left;background:#fff;border:1px solid #eee4d2;border-radius:13px;box-shadow:0 5px 18px #1729430c;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.card-tema:hover{transform:translateY(-3px);box-shadow:0 10px 25px #17294318}
+.card-tema h3{margin-bottom:8px;color:var(--azul-medio);font-size:1.2rem}
+.card-tema p{margin:0;color:var(--gris);font-size:.94rem}
+.pestanas{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0;border-bottom:2px solid #e8dfcd}
+.pestana{padding:12px 18px;border:0;border-radius:8px 8px 0 0;background:transparent;color:var(--azul-oscuro);font-weight:600;cursor:pointer}
+.pestana:hover,.pestana.activa{background:var(--azul-oscuro);color:var(--dorado-claro)}
+.contenido-pestana{display:none;padding:25px;margin:20px 0;background:#fff;border:1px solid #eee4d2;border-radius:12px;box-shadow:0 5px 18px #1729430d}
+.contenido-pestana.activa{display:block}
+.contenido-pestana h3{margin:15px 0 8px;font-size:1.3rem;color:var(--azul-medio)}
+.contenido-pestana ul,.contenido-pestana ol{margin:12px 0;padding-left:25px}
+.contenido-pestana li{margin-bottom:8px}
+.concepto,.pregunta{margin:15px 0;padding:16px;background:#f5f1e8;border-left:4px solid var(--dorado);border-radius:7px}
+.pregunta label{display:block;margin:8px 0;cursor:pointer}
+.pregunta input[type=radio]{width:auto;margin:0 8px 0 0}
+.resultado{margin-top:12px;font-weight:600}
+input,textarea,select{max-width:600px;padding:10px 12px;border:1px solid #cbd3df;border-radius:7px;font:inherit}
+footer{margin-top:60px;padding:25px 7%;background:var(--azul-oscuro);color:#e0e6ef;border-top:3px solid var(--dorado);text-align:center;font-size:.9rem}
+footer p{margin:4px}
+@media(max-width:850px){.grid-modulos{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 22px}.encabezado-titulo{font-size:1.3rem}}
+@media(max-width:550px){header{justify-content:center;padding:18px 5%}.encabezado-titulo{font-size:1.15rem}main{width:92%;margin:25px auto}.grid-modulos,.grid-temas{grid-template-columns:1fr}.grid-modulos{gap:30px;padding:25px 8px}.card-modulo{height:270px}.pagina{padding:15px 10px}.pagina h3{font-size:.92rem}.pagina p{font-size:.72rem}.libro-tapa h3{font-size:1.35rem}.contenido-pestana{padding:18px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="encabezado-logo" onclick="irInicio()">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW7w3MwzoEzFmE3M5KEmqnv1avQYTeTkcX1M5Qdq1qAQ&s" alt="Logo de la Escuela de Artes">
+        <div class="encabezado-titulo">
+            <span class="codigo"></span>
+            <span>Lengua y Literatura</span>
+        </div>
+    </div>
+</header>
+
+<main>
+
+    <!-- INICIO -->
+    <section id="inicio" class="seccion">
+        <div class="hero">
+            <p class="etiqueta">ESCUELA DE ARTES</p>
+            <h1>Lengua y Literatura</h1>
+            <p class="hero-texto">
+                Un espacio para estudiar el lenguaje, comprender los textos,
+                explorar historias y descubrir el mundo de la literatura.
+            </p>
+        </div>
+
+        <div class="contenedor">
+            <h2>Explorá los módulos</h2>
+            <p class="introduccion">
+                Elegí un módulo para acceder a la teoría, los ejemplos
+                y las actividades de práctica.
+            </p>
+            
+<div id="listaModulos" class="grid-modulos" aria-label="Módulos de Lengua y Literatura"></div>
+
+        </div>
+    </section>
+
+    <!-- CONTENIDO DE UN MÓDULO -->
+    <section id="anio" class="seccion oculto">
+        <div class="contenedor">
+            <button class="boton-volver" onclick="irInicio()">
+                ← Volver al inicio
+            </button>
+
+            <div class="titulo-anio">
+                <span class="etiqueta">MATERIAL DE ESTUDIO</span>
+                <h2 id="tituloAnio"></h2>
+                <p id="descripcionAnio"></p>
+            </div>
+
+            <div id="listaTemas" class="grid-temas"></div>
+        </div>
+    </section>
+
+    <!-- CONTENIDO DE UN TEMA -->
+    <section id="tema" class="seccion oculto">
+        <div class="contenedor">
+            <button class="boton-volver" onclick="volverAnio()">
+                ← Volver al módulo
+            </button>
+
+            <div class="titulo-tema">
+                <span class="etiqueta">LENGUA Y LITERATURA</span>
+                <h2 id="tituloTema"></h2>
+            </div>
+
+            <div class="pestanas">
+                <button class="pestana activa"
+                    onclick="mostrarPestana('teoria', this)">
+                    📖 Teoría
+                </button>
+                <button class="pestana"
+                    onclick="mostrarPestana('ejemplos', this)">
+                    💡 Ejemplos
+                </button>
+                <button class="pestana"
+                    onclick="mostrarPestana('practica', this)">
+                    ✏️ Práctica
+                </button>
+            </div>
+
+            <div id="contenido-teoria"
+                class="contenido-pestana activa"></div>
+
+            <div id="contenido-ejemplos"
+                class="contenido-pestana"></div>
+
+            <div id="contenido-practica"
+                class="contenido-pestana"></div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="footer">
+    <p><strong>Lengua y Literatura</strong> · Escuela de Artes</p>
+    <p>Material educativo para aprender y seguir explorando.</p>
+</footer>
+
+<script>
+    const modulos = [
+        {
+            titulo: "La lengua como sistema y teoría de los signos",
+            descripcion: "Lengua, habla, signo lingüístico y clasificación de los signos.",
+            temas: [
+                {
+                    titulo: "Unidades de análisis lingüístico",
+                    descripcion: "La palabra, la oración y el texto.",
+                    teoria: `
+                        <h3>¿Cómo se estudia la lengua?</h3>
+                        <p>El estudio de la lengua analiza distintas unidades
+                        que se organizan para construir mensajes.</p>
+                        <div class="concepto"><strong>Palabra:</strong>
+                        unidad que tiene significado y cumple una función.</div>
+                        <div class="concepto"><strong>Oración:</strong>
+                        conjunto de palabras organizado que expresa una idea.</div>
+                        <div class="concepto"><strong>Texto:</strong>
+                        unidad comunicativa formada por enunciados relacionados
+                        que transmiten un mensaje completo.</div>
+                    `,
+                    ejemplos: `
+                        <h3>Un ejemplo de cada unidad</h3>
+                        <ul>
+                            <li><strong>Palabra:</strong> libro.</li>
+                            <li><strong>Oración:</strong> El libro está sobre la mesa.</li>
+                            <li><strong>Texto:</strong> El libro está sobre la mesa.
+                            Es una novela que me prestó una amiga y que estoy leyendo.</li>
+                        </ul>
+                    `,
+                    practica: `
+                        <h3>Comprobá lo que aprendiste</h3>
+                        <div class="pregunta">
+                            <p>1. ¿Cuál de estas opciones es una unidad comunicativa completa?</p>
+                            <label><input type="radio" name="p1" value="a"> Una letra aislada</label>
+                            <label><input type="radio" name="p1" value="b"> Un texto coherente</label>
+                            <label><input type="radio" name="p1" value="c"> Un sonido sin contexto</label>
+                        </div>
+                        <button class="boton-accion" onclick="corregir('p1','b','r1')">Corregir</button>
+                        <p id="r1" class="resultado"></p>
+                    `
+                },
+                {
+                    titulo: "Lengua y habla",
+                    descripcion: "El sistema compartido y su uso individual.",
+                    teoria: `
+                        <h3>Lengua</h3>
+                        <p>Es el sistema de reglas y signos que comparte
+                        una comunidad de hablantes. Por ejemplo, el español.</p>
+                        <h3>Habla</h3>
+                        <p>Es el uso concreto e individual que cada persona
+                        hace de la lengua en una situación determinada.</p>
+                    `,
+                    ejemplos: `
+                        <div class="concepto"><strong>Lengua:</strong>
+                        las reglas del español que permiten formar oraciones.</div>
+                        <div class="concepto"><strong>Habla:</strong>
+                        una conversación entre dos amigos o un mensaje de voz.</div>
+                    `,
+                    practica: `
+                        <h3>¿Lengua o habla?</h3>
+                        <div class="pregunta">
+                            <p>1. Las reglas gramaticales del español.</p>
+                            <label><input type="radio" name="p2" value="a"> Lengua</label>
+                            <label><input type="radio" name="p2" value="b"> Habla</label>
+                        </div>
+                        <div class="pregunta">
+                            <p>2. Una persona contando lo que hizo ayer.</p>
+                            <label><input type="radio" name="p3" value="a"> Lengua</label>
+                            <label><input type="radio" name="p3" value="b"> Habla</label>
+                        </div>
+                        <button class="boton-accion" onclick="corregirVarios([
+                            ['p2','a','r2'],['p3','b','r3']
+                        ])">Corregir</button>
+                        <p id="r2" class="resultado"></p>
+                        <p id="r3" class="resultado"></p>
+                    `
+                },
+                {
+                    titulo: "El signo lingüístico según Saussure",
+                    descripcion: "Significante, significado y características.",
+                    teoria: `
+                        <h3>¿Qué es un signo lingüístico?</h3>
+                        <p>Es una unidad formada por dos partes que están
+                        relacionadas entre sí.</p>
+                        <div class="concepto"><strong>Significante:</strong>
+                        la forma sonora o escrita de una palabra.</div>
+                        <div class="concepto"><strong>Significado:</strong>
+                        el concepto o idea que asociamos con esa palabra.</div>
+                        <h3>Características</h3>
+                        <ul>
+                            <li><strong>Arbitrariedad:</strong> la relación entre
+                            la palabra y su concepto depende de una convención social.</li>
+                            <li><strong>Inmutabilidad:</strong> una persona no puede
+                            cambiar por sí sola el significado compartido de una palabra.</li>
+                            <li><strong>Mutabilidad:</strong> la lengua puede cambiar
+                            con el paso del tiempo y el uso de la comunidad.</li>
+                        </ul>
+                    `,
+                    ejemplos: `
+                        <h3>La palabra «perro»</h3>
+                        <p><strong>Significante:</strong> los sonidos o letras
+                        que forman la palabra perro.</p>
+                        <p><strong>Significado:</strong> el concepto del animal
+                        que asociamos con esa palabra.</p>
+                        <p>El mismo concepto puede nombrarse de distintas formas:
+                        perro en español y dog en inglés.</p>
+                    `,
+                    practica: `
+                        <h3>Elegí la respuesta correcta</h3>
+                        <div class="pregunta">
+                            <p>¿Qué es el significado de un signo lingüístico?</p>
+                            <label><input type="radio" name="p4" value="a"> La forma escrita de la palabra</label>
+                            <label><input type="radio" name="p4" value="b"> El concepto asociado a la palabra</label>
+                            <label><input type="radio" name="p4" value="c"> La cantidad de letras</label>
+                        </div>
+                        <button class="boton-accion" onclick="corregir('p4','b','r4')">Corregir</button>
+                        <p id="r4" class="resultado"></p>
+                    `
+                },
+                {
+                    titulo: "Clasificación de los signos según Peirce",
+                    descripcion: "Ícono, índice y símbolo.",
+                    teoria: `
+                        <h3>Ícono</h3>
+                        <p>Se parece visualmente o de alguna otra manera
+                        al objeto que representa.</p>
+                        <h3>Índice o indicio</h3>
+                        <p>Mantiene una relación directa o causal con aquello
+                        que señala.</p>
+                        <h3>Símbolo</h3>
+                        <p>Su significado depende de una convención compartida
+                        por una comunidad.</p>
+                    `,
+                    ejemplos: `
+                        <ul>
+                            <li><strong>Ícono:</strong> el dibujo de una bicicleta
+                            en una señal.</li>
+                            <li><strong>Índice:</strong> el humo como indicio de fuego.</li>
+                            <li><strong>Símbolo:</strong> una bandera nacional o
+                            las palabras de un idioma.</li>
+                        </ul>
+                    `,
+                    practica: `
+                        <h3>Identificá el tipo de signo</h3>
+                        <div class="pregunta">
+                            <p>1. Una fotografía de una persona.</p>
+                            <label><input type="radio" name="p5" value="a"> Ícono</label>
+                            <label><input type="radio" name="p5" value="b"> Índice</label>
+                            <label><input type="radio" name="p5" value="c"> Símbolo</label>
+                        </div>
+                        <div class="pregunta">
+                            <p>2. El humo que indica que hay fuego.</p>
+                            <label><input type="radio" name="p6" value="a"> Ícono</label>
+                            <label><input type="radio" name="p6" value="b"> Índice</label>
+                            <label><input type="radio" name="p6" value="c"> Símbolo</label>
+                        </div>
+                        <button class="boton-accion" onclick="corregirVarios([
+                            ['p5','a','r5'],['p6','b','r6']
+                        ])">Corregir</button>
+                        <p id="r5" class="resultado"></p>
+                        <p id="r6" class="resultado"></p>
+                    `
+                }
+            ]
+        },
+        {
+            titulo: "Tipologías textuales",
+            descripcion: "Cómo se organizan los textos según su propósito comunicativo.",
+            temas: [
+                {
+                    titulo: "El texto argumentativo",
+                    descripcion: "Tesis, argumentos y estrategias para convencer.",
+                    teoria: `
+                        <h3>¿Qué es?</h3>
+                        <p>Es un texto que busca convencer o persuadir al lector
+                        sobre una postura determinada.</p>
+                        <h3>Estructura</h3>
+                        <ol>
+                            <li><strong>Introducción:</strong> presenta el tema.</li>
+                            <li><strong>Tesis:</strong> expresa la postura del autor.</li>
+                            <li><strong>Argumentación:</strong> aporta razones para defenderla.</li>
+                            <li><strong>Conclusión:</strong> retoma y refuerza la postura.</li>
+                        </ol>
+                        <h3>Convencer y persuadir</h3>
+                        <p>Convencer se relaciona con razones y argumentos lógicos.
+                        Persuadir busca influir también mediante emociones.</p>
+                        <h3>Estrategias argumentativas</h3>
+                        <ul>
+                            <li><strong>Ejemplificación:</strong> presentar un caso concreto.</li>
+                            <li><strong>Cita de autoridad:</strong> incorporar la opinión de un especialista.</li>
+                            <li><strong>Analogía:</strong> comparar situaciones semejantes.</li>
+                            <li><strong>Refutación:</strong> cuestionar un argumento contrario.</li>
+                            <li><strong>Pregunta retórica:</strong> invitar a reflexionar sin esperar una respuesta directa.</li>
+                        </ul>
+                        <p>Ejemplos de textos argumentativos: editoriales,
+                        notas de opinión, publicidad, spots políticos y cartas de motivación.</p>
+                    `,
+                    ejemplos: `
+                        <h3>Ejemplo de argumentación</h3>
+                        <p><strong>Tema:</strong> la lectura en la escuela.</p>
+                        <p><strong>Tesis:</strong> leer regularmente es importante
+                        para los estudiantes.</p>
+                        <p><strong>Argumento:</strong> la lectura ayuda a ampliar
+                        el vocabulario y comprender distintos puntos de vista.</p>
+                        <p><strong>Conclusión:</strong> por eso, es importante
+                        dedicar tiempo a la lectura.</p>
+                    `,
+                    practica: `
+                        <h3>Reconocé la tesis</h3>
+                        <div class="pregunta">
+                            <p>¿Cuál de estas frases expresa una postura que puede defenderse con argumentos?</p>
+                            <label><input type="radio" name="p7" value="a"> Ayer llovió durante la tarde.</label>
+                            <label><input type="radio" name="p7" value="b"> Las escuelas deberían tener más espacios de lectura.</label>
+                            <label><input type="radio" name="p7" value="c"> El libro tiene 120 páginas.</label>
+                        </div>
+                        <button class="boton-accion" onclick="corregir('p7','b','r7')">Corregir</button>
+                        <p id="r7" class="resultado"></p>
+                    `
+                },
+                {
+                    titulo: "El texto explicativo o expositivo",
+                    descripcion: "Información, definiciones y recursos explicativos.",
+                    teoria: `
+                        <h3>¿Cuál es su propósito?</h3>
+                        <p>Su objetivo es informar y explicar un tema de manera
+                        clara para que el lector pueda comprenderlo.</p>
+                        <h3>Características</h3>
+                        <ul>
+                            <li>Presenta información organizada.</li>
+                            <li>Responde preguntas o explica fenómenos.</li>
+                            <li>Utiliza definiciones, ejemplos y reformulaciones.</li>
+                            <li>Puede usar conectores como «porque», «es decir»
+                            y «por lo tanto».</li>
+                        </ul>
+                        <p>A diferencia del texto argumentativo, su objetivo
+                        principal no es defender una opinión, sino explicar
+                        un conocimiento.</p>
+                    `,
+                    ejemplos: `
+                        <div class="concepto"><strong>Definición:</strong>
+                        La narración es un tipo de texto que cuenta una serie
+                        de acontecimientos.</div>
+                        <div class="concepto"><strong>Ejemplo:</strong>
+                        Una novela y un cuento pueden narrar acontecimientos
+                        protagonizados por distintos personajes.</div>
+                        <div class="concepto"><strong>Reformulación:</strong>
+                        El narrador organiza los hechos; es decir, decide cómo
+                        se presentan en el relato.</div>
+                    `,
+                    practica: `
+                        <h3>Elegí la respuesta correcta</h3>
+                        <div class="pregunta">
+                            <p>¿Cuál es el propósito principal de un texto expositivo?</p>
+                            <label><input type="radio" name="p8" value="a"> Explicar e informar</label>
+                            <label><input type="radio" name="p8" value="b"> Convencer siempre de una opinión</label>
+                            <label><input type="radio" name="p8" value="c"> Contar únicamente hechos ficticios</label>
+                        </div>
+                        <button class="boton-accion" onclick="corregir('p8','a','r8')">Corregir</button>
+                        <p id="r8" class="resultado"></p>
+                    `
+                }
+            ]
+        },
+        {
+            titulo: "Las categorías del texto narrativo",
+            descripcion: "Historia, relato, narrador, tiempo, espacio y voces narrativas.",
+            temas: [
+                {
+                    titulo: "Historia y relato",
+                    descripcion: "Los acontecimientos y la forma de contarlos.",
+                    teoria: `
+                        <h3>Historia</h3>
+                        <p>Es el conjunto de acontecimientos organizados según
+                        su orden cronológico y sus relaciones de causa y consecuencia.</p>
+                        <h3>Relato</h3>
+                        <p>Es la manera concreta en que esos acontecimientos
+                        se presentan al lector.</p>
+                    `,
+                    ejemplos: `
+                        <p>Una historia puede comenzar con la infancia de un
+                        personaje y terminar con su adultez.</p>
+                        <p>El relato, en cambio, puede empezar cuando el personaje
+                        ya es adulto y después contar recuerdos de su infancia.</p>
+                    `,
+                    practica: `
+                        <h3>Comprobá lo aprendido</h3>
+                        <div class="pregunta">
+                            <p>Una novela comienza por el final y luego cuenta el pasado. ¿Qué se modifica?</p>
+                            <label><input type="radio" name="p9" value="a"> La forma de organizar el relato</label>
+                            <label><input type="radio" name="p9" value="b"> Necesariamente los hechos de la historia</label>
+                        </div>
+                        <button class="boton-accion" onclick="corregir('p9','a','r9')">Corregir</button>
+                        <p id="r9" class="resultado"></p>
+                    `
+                },
+                {
+                    titulo: "El narrador y sus tipos",
+                    descripcion: "Protagonista, testigo, omnisciente y objetivo.",
+                    teoria: `
+                        <h3>Narrador protagonista</h3>
+                        <p>Cuenta su propia historia, generalmente en primera persona.</p>
+                        <h3>Narrador testigo</h3>
+                        <p>Cuenta hechos que presenció o conoció, pero no es
+                        necesariamente el personaje principal.</p>
+                        <h3>Narrador omnisciente</h3>
+                        <p>Narra en tercera persona y conoce los pensamientos,
+                        sentimientos y acciones de los personajes.</p>
+                        <h3>Narrador objetivo</h3>
+                        <p>Describe principalmente acciones y hechos observables,
+                        sin acceder directamente a los pensamientos de los personajes.</p>
+                    `,
+                    ejemplos: `
+                        <ul>
+                            <li><strong>Protagonista:</strong> «Yo nunca olvidé aquel día».</li>
+                            <li><strong>Testigo:</strong> «Vi a Martín salir de la casa».</li>
+                            <li><strong>Omnisciente:</strong> «Lucía sonrió, aunque en
+                            realidad estaba preocupada».</li>
+                            <li><strong>Objetivo:</strong> «Lucía entró, dejó la mochila
+                            y se sentó junto a la ventana».</li>
+                        </ul>
+                    `,
+                    practica: `
+                        <h3>Identificá al narrador</h3>
+                        <div class="pregunta">
+                            <p>«Yo recorrí el pueblo y encontré la carta».</p>
+                            <label><input type="radio" name="p10" value="a"> Protagonista</label>
+                            <label><input type="radio" name="p10" value="b"> Omnisciente</label>
+                            <label><input type="radio" name="p10" value="c"> Objetivo</label>
+                        </div>
+                        <button class="boton-accion" onclick="corregir('p10','a','r10')">Corregir</button>
+                        <p id="r10" class="resultado"></p>
+                    `
+                },
+                {
+                    titulo: "Tiempo y espacio narrativo",
+                    descripcion: "Cronología, analepsis, prolepsis y escenarios.",
+                    teoria: `
+                        <h3>Tiempo de la historia</h3>
+                        <p>Es el orden cronológico y la duración de los acontecimientos.</p>
+                        <h3>Tiempo del relato</h3>
+                        <p>Es la manera en que el narrador organiza temporalmente
+                        esos acontecimientos.</p>
+                        <ul>
+                            <li><strong>Analepsis:</strong> salto hacia el pasado.</li>
+                            <li><strong>Prolepsis:</strong> anticipación de un hecho futuro.</li>
+                        </ul>
+                        <h3>Tipos de espacio</h3>
+                        <ul>
+                            <li><strong>Físico:</strong> el lugar donde ocurren los hechos.</li>
+                            <li><strong>Psicológico:</strong> la atmósfera emocional que
+                            se relaciona con el entorno.</li>
+                            <li><strong>Social:</strong> las condiciones sociales y
+                            económicas de los personajes.</li>
+                        </ul>
+                    `,
+                    ejemplos: `
+                        <p><strong>Analepsis:</strong> el personaje recuerda un
+                        momento de su infancia.</p>
+                        <p><strong>Prolepsis:</strong> el narrador adelanta que años
+                        después el personaje volverá a ese lugar.</p>
+                        <p><strong>Espacio físico:</strong> una estación de tren.</p>
+                        <p><strong>Espacio social:</strong> un barrio marcado por
+                        diferencias económicas.</p>
+                    `,
+                    practica: `
+                        <h3>Elegí la respuesta correcta</h3>
+                        <div class="pregunta">
+                            <p>Cuando un personaje recuerda un acontecimiento pasado, se produce una...</p>
+                            <label><input type="radio" name="p11" value="a"> Prolepsis</label>
+                            <label><input type="radio" name="p11" value="b"> Analepsis</label>
+                        </div>
+                        <button class="boton-accion" onclick="corregir('p11','b','r11')">Corregir</button>
+                        <p id="r11" class="resultado"></p>
+                    `
+                },
+                {
+                    titulo: "Polifonía narrativa",
+                    descripcion: "La presencia de diferentes voces y perspectivas.",
+                    teoria: `
+                        <h3>¿Qué es la polifonía?</h3>
+                        <p>Es la presencia de distintas voces y perspectivas
+                        dentro de una narración. Cada personaje puede interpretar
+                        los hechos de una manera diferente.</p>
+                        <p>Estas voces permiten mostrar diferentes ideas,
+                        experiencias y formas de comprender el mundo.</p>
+                    `,
+                    ejemplos: `
+                        <p>En una novela, dos hermanos cuentan el mismo conflicto
+                        familiar. Uno cree que fue una injusticia y el otro piensa
+                        que fue una decisión necesaria.</p>
+                        <p>Las diferentes versiones generan una narración con
+                        múltiples perspectivas.</p>
+                    `,
+                    practica: `
+                        <h3>Comprobá lo aprendido</h3>
+                        <div class="pregunta">
+                            <p>¿Qué característica se relaciona con la polifonía narrativa?</p>
+                            <label><input type="radio" name="p12" value="a"> La presencia de distintas voces y perspectivas</label>
+                            <label><input type="radio" name="p12" value="b"> La ausencia total de personajes</label>
+                        </div>
+                        <button class="boton-accion" onclick="corregir('p12','a','r12')">Corregir</button>
+                        <p id="r12" class="resultado"></p>
+                    `
+                }
+            ]
+        },
+        {
+            titulo: "La narración en la era digital",
+            descripcion: "Storytelling, publicidad, política e imágenes.",
+            temas: [
+                {
+                    titulo: "¿Qué es el storytelling?",
+                    descripcion: "El arte de contar historias para transmitir un mensaje.",
+                    teoria: `
+                        <h3>Definición</h3>
+                        <p>El storytelling es una técnica que consiste en contar
+                        historias organizadas para transmitir un mensaje y conectar
+                        con una audiencia.</p>
+                        <h3>Storytelling publicitario</h3>
+                        <p>Las marcas cuentan historias con las que el público
+                        puede identificarse, en lugar de limitarse a enumerar
+                        las características de un producto.</p>
+                        <h3>Storytelling político</h3>
+                        <p>Los candidatos construyen relatos e imágenes para
+                        comunicar sus propuestas, valores e identidad.</p>
+                    `,
+                    ejemplos: `
+                        <h3>Ejemplo publicitario</h3>
+                        <p>Un anuncio muestra a una familia que se reúne para
+                        cocinar. El producto aparece dentro de esa historia,
+                        asociado con el encuentro y los recuerdos.</p>
+                        <h3>Ejemplo político</h3>
+                        <p>Un video presenta a un candidato recorriendo distintos
+                        barrios y escuchando las necesidades de los vecinos.</p>
+                    `,
+                    practica: `
+                        <h3>Elegí la respuesta correcta</h3>
+                        <div class="pregunta">
+                            <p>¿Qué busca principalmente el storytelling?</p>
+                            <label><input type="radio" name="p13" value="a"> Conectar con una audiencia mediante historias</label>
+                            <label><input type="radio" name="p13" value="b"> Presentar solamente datos sin contexto</label>
+                        </div>
+                        <button class="boton-accion" onclick="corregir('p13','a','r13')">Corregir</button>
+                        <p id="r13" class="resultado"></p>
+                    `
+                },
+                {
+                    titulo: "Relato político, símbolos e imágenes",
+                    descripcion: "Conflicto, héroe, destinatario y framing.",
+                    teoria: `
+                        <h3>Roles del relato político</h3>
+                        <ul>
+                            <li><strong>Conflicto:</strong> el problema que impulsa la historia.</li>
+                            <li><strong>Héroe:</strong> el candidato presentado como protagonista.</li>
+                            <li><strong>Oponente:</strong> el adversario o problema que enfrenta.</li>
+                            <li><strong>Destinatario:</strong> la ciudadanía a la que se dirige el mensaje.</li>
+                        </ul>
+                        <h3>Framing</h3>
+                        <p>Es la manera de presentar un tema mediante palabras,
+                        imágenes y enfoques que destacan algunos aspectos
+                        e influyen en cómo se interpreta una situación.</p>
+                    `,
+                    ejemplos: `
+                        <p>Un anuncio muestra una ciudad con plazas renovadas
+                        y utiliza imágenes de familias disfrutando esos espacios.
+                        La selección de imágenes destaca la idea de bienestar
+                        y mejora de la vida cotidiana.</p>
+                    `,
+                    practica: `
+                        <h3>Comprobá lo aprendido</h3>
+                        <div class="pregunta">
+                            <p>¿Qué es el framing?</p>
+                            <label><input type="radio" name="p14" value="a"> La manera de presentar un tema para orientar su interpretación</label>
+                            <label><input type="radio" name="p14" value="b"> Una lista de personajes de una novela</label>
+                        </div>
+                        <button class="boton-accion" onclick="corregir('p14','a','r14')">Corregir</button>
+                        <p id="r14" class="resultado"></p>
+                    `
+                }
+            ]
+        },
+        {
+            titulo: "Teoría literaria y análisis de obras",
+            descripcion: "Ficción, canon, clásicos, paratextos y drama familiar.",
+            temas: [
+                {
+                    titulo: "Literatura y pacto ficcional",
+                    descripcion: "La ficción y la verosimilitud de los mundos literarios.",
+                    teoria: `
+                        <h3>¿Qué es la literatura?</h3>
+                        <p>Es una forma de expresión artística que utiliza
+                        el lenguaje para crear mundos, contar historias,
+                        explorar ideas y transmitir experiencias.</p>
+                        <h3>Pacto ficcional</h3>
+                        <p>Es el acuerdo por el que el lector acepta entrar
+                        en el universo imaginario de una obra.</p>
+                        <h3>Verosimilitud</h3>
+                        <p>Es la coherencia de los hechos dentro del mundo
+                        que presenta una obra. Algo puede ser fantástico
+                        y, aun así, resultar verosímil si respeta sus propias reglas.</p>
+                    `,
+                    ejemplos: `
+                        <p>En una novela fantástica, un personaje puede hablar
+                        con un animal. Si eso es posible dentro de las reglas
+                        del universo creado, el hecho puede resultar verosímil.</p>
+                    `,
+                    practica: `
+                        <h3>Elegí la respuesta correcta</h3>
+                        <div class="pregunta">
+                            <p>¿Qué es la verosimilitud?</p>
+                            <label><input type="radio" name="p15" value="a"> La coherencia de los hechos dentro del mundo de una obra</label>
+                            <label><input type="radio" name="p15" value="b"> Que todos los hechos sean reales</label>
+                        </div>
+                        <button class="boton-accion" onclick="corregir('p15','a','r15')">Corregir</button>
+                        <p id="r15" class="resultado"></p>
+                    `
+                },
+                {
+                    titulo: "El canon literario y los clásicos",
+                    descripcion: "Obras reconocidas y lecturas que perduran en el tiempo.",
+                    teoria: `
+                        <h3>Canon literario</h3>
+                        <p>Es el conjunto de obras que una sociedad o una época
+                        considera importantes. En su formación influyen las
+                        escuelas, la crítica y las editoriales.</p>
+                        <h3>¿Qué es un clásico?</h3>
+                        <p>Es una obra que sigue ofreciendo nuevas interpretaciones
+                        con el paso del tiempo y que continúa siendo leída
+                        por distintas generaciones.</p>
+                        <p>Las reflexiones de Jorge Luis Borges e Italo Calvino
+                        ayudan a comprender por qué algunas obras permanecen
+                        vigentes y admiten nuevas lecturas.</p>
+                    `,
+                    ejemplos: `
+                        <p>Una obra clásica puede haber sido escrita hace siglos
+                        y seguir generando preguntas sobre la sociedad, las
+                        relaciones humanas o la identidad.</p>
+                        <p>Su interpretación puede cambiar según la época
+                        y la experiencia de cada lector.</p>
+                    `,
+                    practica: `
+                        <h3>Comprobá lo aprendido</h3>
+                        <div class="pregunta">
+                            <p>¿Qué característica se relaciona con un clásico literario?</p>
+                            <label><input type="radio" name="p16" value="a"> Solo puede interpretarse de una manera</label>
+                            <label><input type="radio" name="p16" value="b"> Puede ofrecer nuevas lecturas con el paso del tiempo</label>
+                        </div>
+                        <button class="boton-accion" onclick="corregir('p16','b','r16')">Corregir</button>
+                        <p id="r16" class="resultado"></p>
+                    `
+                },
+                {
+                    titulo: "Los paratextos",
+                    descripcion: "Elementos que acompañan y presentan una obra.",
+                    teoria: `
+                        <h3>¿Qué son?</h3>
+                        <p>Son los elementos que rodean al texto principal
+                        y ayudan al lector a acercarse a la obra.</p>
+                        <ul>
+                            <li><strong>Título:</strong> identifica la obra y puede anticipar su tema.</li>
+                            <li><strong>Contratapa:</strong> suele presentar una síntesis
+                            o información para atraer al lector.</li>
+                            <li><strong>Prólogo:</strong> introduce la obra o aporta
+                            información para leerla.</li>
+                            <li><strong>Ilustraciones:</strong> acompañan o interpretan
+                            visualmente el contenido.</li>
+                            <li><strong>Blurb:</strong> breve recomendación o elogio
+                            de un autor o crítico que aparece en la portada o contratapa.</li>
+                        </ul>
+                    `,
+                    ejemplos: `
+                        <p>Antes de leer una novela, una persona observa el título,
+                        la imagen de la tapa y el resumen de la contratapa.
+                        Esos elementos son paratextos que pueden orientar
+                        sus expectativas sobre la historia.</p>
+                    `,
+                    practica: `
+                        <h3>Elegí la respuesta correcta</h3>
+                        <div class="pregunta">
+                            <p>¿Qué suele ser un blurb?</p>
+                            <label><input type="radio" name="p17" value="a"> Una breve recomendación de la obra</label>
+                            <label><input type="radio" name="p17" value="b"> El capítulo final de una novela</label>
+                        </div>
+                        <button class="boton-accion" onclick="corregir('p17','a','r17')">Corregir</button>
+                        <p id="r17" class="resultado"></p>
+                    `
+                },
+                {
+                    titulo: "El drama familiar en la literatura",
+                    descripcion: "Vínculos, conflictos y relaciones familiares.",
+                    teoria: `
+                        <h3>El eje temático</h3>
+                        <p>El drama familiar reúne relatos que exploran
+                        los vínculos entre familiares, los conflictos, los recuerdos
+                        y las distintas formas de vivir una relación.</p>
+                        <p>Estas historias pueden desarrollarse en espacios urbanos
+                        o rurales y presentar problemas relacionados con la identidad,
+                        la memoria, las diferencias generacionales y la sociedad.</p>
+                        <h3>Obras del eje de lectura</h3>
+                        <ul>
+                            <li><em>Ladrilleros</em>, de Selva Almada.</li>
+                            <li><em>El verano en que mi madre tuvo los ojos verdes</em>,
+                            de Tatiana Țîbuleac.</li>
+                            <li><em>La otra hija</em>, de Annie Ernaux.</li>
+                            <li><em>Quién mató a mi padre</em>, de Édouard Louis.</li>
+                        </ul>
+                    `,
+                    ejemplos: `
+                        <p>Al analizar una obra de este eje, podés observar
+                        cómo se relacionan los personajes, qué conflictos
+                        atraviesan y cómo influye el entorno social en sus vidas.</p>
+                        <p>También podés estudiar quién narra, qué recuerdos aparecen
+                        y qué sentimientos se expresan en el relato.</p>
+                    `,
+                    practica: `
+                        <h3>Analizá una obra</h3>
+                        <p>Elegí una de las obras del eje familiar y respondé:</p>
+                        <ol>
+                            <li>¿Quiénes son los personajes principales?</li>
+                            <li>¿Qué conflicto familiar aparece?</li>
+                            <li>¿En qué espacio se desarrolla la historia?</li>
+                            <li>¿Quién cuenta los acontecimientos?</li>
+                            <li>¿Qué reflexión te deja la obra?</li>
+                        </ol>
+                        <p>Estas preguntas son para desarrollar por escrito.</p>
+                    `
+                }
+            ]
+        }
+    ];
+
+    let moduloActual = 0;
+    let temaActual = 0;
+
+    function irInicio() {
+        document.querySelectorAll(".seccion").forEach(seccion => {
+            seccion.classList.add("oculto");
+        });
+
+        document.getElementById("inicio").classList.remove("oculto");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function mostrarAnio(numero) {
+        moduloActual = numero - 1;
+
+        const modulo = modulos[moduloActual];
+
+        document.getElementById("inicio").classList.add("oculto");
+        document.getElementById("tema").classList.add("oculto");
+        document.getElementById("anio").classList.remove("oculto");
+
+        document.getElementById("tituloAnio").textContent =
+            "Módulo " + numero + ": " + modulo.titulo;
+
+        document.getElementById("descripcionAnio").textContent =
+            modulo.descripcion;
+
+        const lista = document.getElementById("listaTemas");
+        lista.innerHTML = "";
+
+        modulo.temas.forEach((tema, indice) => {
+            const tarjeta = document.createElement("button");
+            tarjeta.className = "card-tema";
+            tarjeta.type = "button";
+
+            const titulo = document.createElement("h3");
+            titulo.textContent = tema.titulo;
+
+            const descripcion = document.createElement("p");
+            descripcion.textContent = tema.descripcion;
+
+            tarjeta.append(titulo, descripcion);
+            tarjeta.addEventListener("click", () => mostrarTema(indice));
+
+            lista.appendChild(tarjeta);
+        });
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function mostrarTema(indice) {
+        temaActual = indice;
+
+        const tema = modulos[moduloActual].temas[temaActual];
+
+        document.getElementById("anio").classList.add("oculto");
+        document.getElementById("tema").classList.remove("oculto");
+
+        document.getElementById("tituloTema").textContent = tema.titulo;
+        document.getElementById("contenido-teoria").innerHTML = tema.teoria;
+        document.getElementById("contenido-ejemplos").innerHTML = tema.ejemplos;
+        document.getElementById("contenido-practica").innerHTML = tema.practica;
+
+        const botones = document.querySelectorAll(".pestana");
+        botones.forEach(boton => boton.classList.remove("activa"));
+        botones[0].classList.add("activa");
+
+        document.querySelectorAll(".contenido-pestana").forEach(contenido => {
+            contenido.classList.remove("activa");
+        });
+        document.getElementById("contenido-teoria").classList.add("activa");
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function volverAnio() {
+        document.getElementById("tema").classList.add("oculto");
+        document.getElementById("anio").classList.remove("oculto");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function mostrarPestana(nombre, boton) {
+        document.querySelectorAll(".pestana").forEach(pestana => {
+            pestana.classList.remove("activa");
+        });
+
+        document.querySelectorAll(".contenido-pestana").forEach(contenido => {
+            contenido.classList.remove("activa");
+        });
+
+        boton.classList.add("activa");
+        document.getElementById("contenido-" + nombre).classList.add("activa");
+    }
+
+    function corregir(nombre, respuestaCorrecta, resultadoId) {
+        const seleccion = document.querySelector(
+            `input[name="${nombre}"]:checked`
+        );
+
+        const resultado = document.getElementById(resultadoId);
+
+        if (!seleccion) {
+            resultado.textContent = "Elegí una respuesta antes de corregir.";
+            resultado.style.color = "#9a6a16";
+            return;
+        }
+
+        if (seleccion.value === respuestaCorrecta) {
+            resultado.textContent = "¡Correcto! Muy bien.";
+            resultado.style.color = "#24734d";
+        } else {
+            resultado.textContent = "No es correcto. Volvé a leer la teoría e intentá otra vez.";
+            resultado.style.color = "#b33d3d";
+        }
+    }
+
+    function corregirVarios(preguntas) {
+        preguntas.forEach(([nombre, respuesta, resultadoId]) => {
+            corregir(nombre, respuesta, resultadoId);
+        });
+    }
+
+    function cargarModulos() {
+        const lista = document.getElementById("listaModulos");
+        if (!lista) return;
+
+        lista.innerHTML = "";
+
+        modulos.forEach((modulo, indice) => {
+            const tarjeta = document.createElement("button");
+            tarjeta.className = "card-modulo";
+            tarjeta.type = "button";
+            tarjeta.setAttribute("aria-label", `Abrir módulo ${indice + 1}: ${modulo.titulo}`);
+
+            tarjeta.innerHTML = `
+                <div class="libro">
+                    <div class="libro-hojas">
+                        <div class="pagina pagina-izquierda">
+                            <span>UNIDAD ${String(indice + 1).padStart(2, "0")}</span>
+                            <h3>${modulo.titulo}</h3>
+                            <p>${modulo.descripcion}</p>
+                        </div>
+                        <div class="pagina pagina-derecha">
+                            <span>MATERIAL DE ESTUDIO</span>
+                            <h3>¡Empecemos!</h3>
+                            <p>Explorá la teoría, los ejemplos y las actividades de esta unidad.</p>
+                            <span class="ver-modulo">Leer unidad →</span>
+                        </div>
+                    </div>
+                    <div class="libro-tapa">
+                        <span class="tapa-numero">UNIDAD ${String(indice + 1).padStart(2, "0")}</span>
+                        <span class="tapa-decoracion" aria-hidden="true">❧</span>
+                        <h3>${modulo.titulo}</h3>
+                        <span class="tapa-subtitulo">Lengua y literatura</span>
+                    </div>
+                </div>
+            `;
+
+            tarjeta.addEventListener("click", () => mostrarAnio(indice + 1));
+            lista.appendChild(tarjeta);
+        });
+    }
+
+    cargarModulos();
+</script>
+
+</body>
+</html>
